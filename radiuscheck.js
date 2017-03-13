@@ -17,9 +17,9 @@ var transporter = nodemailer.createTransport(smtpTransport({
 transporter.verify(function (error, success) {
     'use strict';
     if (error) {
-        console.log(error);
+        console.log(Date() + ' ' + error);
     } else {
-        console.log('Server is ready to take our messages');
+        console.log(Date() + ' - Server is ready to take our messages');
     }
 });
 
@@ -28,21 +28,21 @@ var stopped = {
     from: '"radiuscheck.js" <noreply@radiuscheck.com>', // sender address
     to: 'rscheunemann@clddigital.com', // list of receivers
     subject: 'Printflow updates have stopped', // Subject line
-    html: '<b>Danger! </b>Printflow has not updated in the last 20 minutes.<br /><img src="http://digital/images/danger.jpg"/>'
+    html: '<p><b>Danger! </b>Printflow has not updated in the last 20 minutes.</p><img src="http://digital/images/danger.jpg"/>'
 };
 
 var restored = {
     from: '"radiuscheck.js" <noreply@radiuscheck.com>', // sender address
     to: 'rscheunemann@clddigital.com', // list of receivers
     subject: "Printflow updates back online", // Subject line
-    html: '<b>it\'s ba-ack...</b>Printflow updates have started again.<br /><img src="http://digital/images/ba-ack.jpg"/>'
+    html: '<p><b>it\'s ba-ack...</b>Printflow updates have started again.</p><img src="http://digital/images/ba-ack.jpg"/>'
 };
 
 var fileError = {
     from: '"radiuscheck.js" <noreply@radiuscheck.com>', // sender address
     to: 'rscheunemann@clddigital.com', // list of receivers
     subject: "Printflow Volume Unavailable", // Subject line
-    html: '<b>Taken </b>Either the DBServer has lost the connection, or the server radapp12-ocon is offline.<br /><img src="http://digital/images/ba-ack.jpg"/>'
+    html: '<p><b>Connection Missing. </b>Either the DBServer has lost the connection, or the server radapp12-ocon is offline.</p><img src="http://digital/images/taken.jpg"/>'
 };
 
 //var targetDir = "/Volumes/Jobs/111000-Test Customer92-mm template test";
@@ -61,9 +61,10 @@ function chkDir() {
                 if (error) {
                     return console.log(error);
                 }
+                console.log(Date() + ' - Message %s sent: %s', info.messageId, info.response);
             });
             radiusStopped = true;
-            return console.log(err);
+            return console.log(Date() + ' ' + err);
         }
         var cTime = stats.ctime;
         if (cTime.getTime() < now) {
@@ -72,20 +73,20 @@ function chkDir() {
                 radiusStopped = true;
                 transporter.sendMail(stopped, function (error, info) {
                     if (error) {
-                        return console.log(error);
+                        return console.log(Date() + ' ' + error);
                     }
-                    console.log(cTime + ' - Message %s sent: %s', info.messageId, info.response);
+                    console.log(Date() + ' - Message %s sent: %s', info.messageId, info.response);
                 });
             }
         } else if (radiusStopped) {
             //dir was changed in last 20 min after being stopped
-            console.log(cTime + ' - printflow started after stop');
+            console.log(Date() + ' - printflow started after stop');
             radiusStopped = false;
             transporter.sendMail(restored, function (error, info) {
                 if (error) {
-                    return console.log(error);
+                    return console.log(Date() + ' ' + error);
                 }
-                console.log('Message %s sent: %s', info.messageId, info.response);
+                console.log(Date() + ' - Message %s sent: %s', info.messageId, info.response);
             });
         }
     });
