@@ -56,14 +56,16 @@ function chkDir() {
     //get modified date of folder
     fs.stat(targetDir, function (err, stats) {
         if (err) {
-            console.log(Date());
-            transporter.sendMail(fileError, function (error, info) {
-                if (error) {
-                    return console.log(error);
-                }
-                console.log(Date() + ' - Message %s sent: %s', info.messageId, info.response);
-            });
-            radiusStopped = true;
+            if (!radiusStopped) {
+                //only send email on first error
+                transporter.sendMail(fileError, function (error, info) {
+                    if (error) {
+                        return console.log(error);
+                    }
+                    console.log(Date() + ' - "fileError" Message %s sent: %s', info.messageId, info.response);
+                });
+                radiusStopped = true;
+            }
             return console.log(Date() + ' ' + err);
         }
         var cTime = stats.ctime;
@@ -75,7 +77,7 @@ function chkDir() {
                     if (error) {
                         return console.log(Date() + ' ' + error);
                     }
-                    console.log(Date() + ' - Message %s sent: %s', info.messageId, info.response);
+                    console.log(Date() + ' - "stopped" Message %s sent: %s', info.messageId, info.response);
                 });
             }
         } else if (radiusStopped) {
@@ -86,7 +88,7 @@ function chkDir() {
                 if (error) {
                     return console.log(Date() + ' ' + error);
                 }
-                console.log(Date() + ' - Message %s sent: %s', info.messageId, info.response);
+                console.log(Date() + ' - "restored" Message %s sent: %s', info.messageId, info.response);
             });
         }
     });

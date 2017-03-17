@@ -2,11 +2,11 @@
   "name": "radiuscheck",
   "version": "1.0.0",
   "description": "check that radius is still  updating",
-  "main": "index.js",
+  "main": "radiuscheck.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Rick Scheunemann",
   "license": "ISC",
   "dependencies": {
     "nodemailer": "^3.0.2"
