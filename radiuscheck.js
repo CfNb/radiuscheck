@@ -25,21 +25,21 @@ transporter.verify(function (error, success) {
 
 // setup email data
 var stopped = {
-    from: '"radiuscheck.js" <noreply@radiuscheck.com>', // sender address
-    to: 'rscheunemann@clddigital.com', // list of receivers
+    from: '"radiuscheck.js" <radiuscheck@clddigital.com>', // sender address
+    to: '', // list of receivers
     subject: 'Printflow updates have stopped', // Subject line
     html: '<p><b>Danger! </b>Printflow has not updated in the last 20 minutes.</p><img src="http://digital/images/danger.jpg"/>'
 };
 
 var restored = {
-    from: '"radiuscheck.js" <noreply@radiuscheck.com>', // sender address
+    from: '"radiuscheck.js" <radiuscheck@clddigital.com>', // sender address
     to: 'rscheunemann@clddigital.com', // list of receivers
     subject: "Printflow updates back online", // Subject line
     html: '<p><b>it\'s ba-ack...</b>Printflow updates have started again.</p><img src="http://digital/images/ba-ack.jpg"/>'
 };
 
 var fileError = {
-    from: '"radiuscheck.js" <noreply@radiuscheck.com>', // sender address
+    from: '"radiuscheck.js" <radiuscheck@clddigital.com>', // sender address
     to: 'rscheunemann@clddigital.com', // list of receivers
     subject: "Printflow Volume Unavailable", // Subject line
     html: '<p><b>Connection Missing. </b>Either the DBServer has lost the connection, or the server radapp12-ocon is offline.</p><img src="http://digital/images/taken.jpg"/>'
