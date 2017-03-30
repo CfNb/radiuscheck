@@ -1,6 +1,6 @@
 {
   "name": "radiuscheck",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "check that radius is still  updating",
   "main": "radiuscheck.js",
   "scripts": {
