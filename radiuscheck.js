@@ -23,7 +23,7 @@ transporter.verify(function (error, success) {
     }
 });
 
-var recipients = ''; // list of receivers
+var recipients = 'jeffertz@clddigital.com, rscheunemann@clddigital.com, csigmund@clddigital.com, oluna@clddigital.com'; // list of receivers
 
 // setup email data
 var stopped = {

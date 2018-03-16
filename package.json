@@ -9,6 +9,7 @@
   "author": "Rick Scheunemann",
   "license": "ISC",
   "dependencies": {
+    "node-osascript": "^2.0.0",
     "nodemailer": "^3.0.2"
   }
 }
